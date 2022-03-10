@@ -2,75 +2,105 @@
 
 namespace consoleCalc
 {
-    class Program
-    {
-        static void Main()
+	class Program
+	{
+		static readonly char[] массивЗнаков = { '+', '-', '*', '/', '^', '%'}; //скобки потом
+		static void Main() 
+		{ 
+			Console.Write("доступные знаки: "); 
+			ВыводМассиваЗнаков(); 
+			Console.Write("\nвведите выражение: "); 
+			string выражение = Console.ReadLine();
+			Console.WriteLine($"ответ: {Calc(выражение)}"); 
+		}
+		static void ВыводМассиваЗнаков()
+		{
+			for (int i = 0; i < массивЗнаков.Length; i++) 
+			{ 
+				Console.Write(массивЗнаков[i]); 
+				if (массивЗнаков.Length - 1 != i) Console.Write(", ");
+				else Console.Write(".");
+			}
+		}
+		static double Calc(string выр)
+		{
+			double ans = 0;
+			//поиск количества всех знаков
+			int колво_знаков = Сколько(выр);
+			//поиск знака и определение
+			int pos = Где(выр, out char знак);
+			//определение чисел
+			ans = Числа(выр, pos, колво_знаков);
+            return ans;
+		}
+		static double Числа(string выр, int след_знак, int повторения)
         {
-            Console.Write("доступные знаки: +, -, *, /.\nвведите выражение: ");
-            string выражение = Console.ReadLine();
-            Console.WriteLine($"ответ: {Calc(выражение)}");
-        }
-        static double Calc(string выр)
+			int пред_знак = -1;
+			double first = Число(пред_знак, след_знак, выр);
+			return first;
+		}
+		static double Число(int МестоПервогоЗнака, int местоВторогоЗнака, string гдеИскать)
         {
-            //переменные
-            double ans = 0;
-            int pos;
-            int колво_знаков = 0;
-            //поиск количества всех знаков
-            колво_знаков += Сколько(выр, "+");
-            колво_знаков += Сколько(выр, "-");
-            колво_знаков += Сколько(выр, "*");
-            колво_знаков += Сколько(выр, "/");
-            //поиск знака и определение
-            char знак;
-            pos = Где(выр, out знак);
-
-            return колво_знаков;
+			string число = "";
+			for (int i = МестоПервогоЗнака + 1; i < местоВторогоЗнака; i++) число += гдеИскать[i];
+			return Convert.ToDouble(число);
         }
-        static int Сколько(string изКого, string что)
-        {
-            //bool ans = false;
-            int счётчикСовпадений = 0;
-            for (int i = 0; i < изКого.Length; i++) { if (изКого[i] == что[i]) счётчикСовпадений++; }
-            return счётчикСовпадений;
-        }
-        static int Где(string выр, out char знак)
-        {
-            int pos = -1;
-            знак = '0';
-            bool brek = false;
-            for (int i = 0; i < выр.Length; i++)
-            {
-                pos = i;
-                знак = Свич(выр[i], ref pos, ref brek);
-                if (brek) break;
-            }
-            return pos;
-        }
-        static char Свич(char откуда_искать, ref int итерация, ref bool брейк)
-        {
-            char знак = '0';
-            switch (откуда_искать)
-            {
-                case '+':
-                    знак = '+';
-                    брейк = true;
-                    break;
-                case '-':
-                    знак = '-';
-                    брейк = true;
-                    break;
-                case '*':
-                    знак = '*';
-                    брейк = true;
-                    break;
-                case '/':
-                    знак = '/';
-                    брейк = true;
-                    break;
-            }
-            if (знак == '0') итерация = -1;
-            return знак;
-        }
-    }
+		static int Сколько(string выр)
+		{
+			int счётчикСовпадений = 0;
+			for (int i = 0; i < выр.Length; i++)
+			{
+				for (int j = 0; j < массивЗнаков.Length; j++)
+				{
+					if (выр[i] == массивЗнаков[j]) счётчикСовпадений++;
+				}
+			}
+			if (счётчикСовпадений == 0) счётчикСовпадений = выр.Length;
+			return счётчикСовпадений;
+		}
+		static int Где(string выр, out char знак)
+		{
+			int pos = выр.Length;
+			знак = '0';
+			bool brek = false;
+			for (int i = 0; i < выр.Length; i++)
+			{
+				pos = i;
+				знак = Свич(выр[i], ref pos, ref brek);
+				if (brek) break;
+			}
+			return pos;
+		}
+		static char Свич(char откуда_искать, ref int итерация, ref bool брейк)
+		{
+			char знак = '0';
+			switch (откуда_искать)
+			{
+				case '+':
+					знак = '+';
+					брейк = true;
+					break;
+				case '-':
+					знак = '-';
+					брейк = true;
+					break;
+				case '*':
+					знак = '*';
+					брейк = true;
+					break;
+				case '/':
+					знак = '/';
+					брейк = true;
+					break;
+			}
+			if (знак == '0') итерация = -1;
+			return знак;
+		}
+		static int Степень(int a, int b)
+		{
+			int ans = 1;
+			for (int i = 0; i < b; i++) ans *= a;
+			return ans;
+		}
+	}
 }
