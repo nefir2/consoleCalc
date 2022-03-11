@@ -25,10 +25,12 @@ namespace consoleCalc
 		static double Calc(string выр)
 		{
 			double ans = 0;
+			int pos;
 			//поиск количества всех знаков
 			int колво_знаков = Сколько(выр);
 			//поиск знака и определение
-			int pos = Где(выр, out char знак);
+			if (колво_знаков == 0) pos = выр.Length;
+			else pos = Где(выр, out char знак);
 			//определение чисел
 			ans = Числа(выр, pos, колво_знаков);
             return ans;
@@ -55,7 +57,6 @@ namespace consoleCalc
 					if (выр[i] == массивЗнаков[j]) счётчикСовпадений++;
 				}
 			}
-			if (счётчикСовпадений == 0) счётчикСовпадений = выр.Length;
 			return счётчикСовпадений;
 		}
 		static int Где(string выр, out char знак)
