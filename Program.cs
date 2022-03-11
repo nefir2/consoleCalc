@@ -4,14 +4,34 @@ namespace consoleCalc
 {
 	class Program
 	{
-		static readonly char[] массивЗнаков = { '+', '-', '*', '/', '^', '%'}; //скобки потом
+		static readonly char[] массивЗнаков = { '+', '-', '*', '/', '^', '%', '!', '(', ')'}; //скобки потом
+		static int количествоЗнаков = 0;
 		static void Main() 
-		{ 
+		{
 			Console.Write("доступные знаки: "); 
 			ВыводМассиваЗнаков(); 
-			Console.Write("\nвведите выражение: "); 
-			string выражение = Console.ReadLine();
+			Console.Write("\nвведите выражение: ");
+			string выражение = Нажатие_клавиш();
 			Console.WriteLine($"ответ: {Calc(выражение)}"); 
+		}
+		static string Нажатие_клавиш()
+		{
+			string returner = "";
+			ConsoleKeyInfo клавиша;
+			do
+			{
+				клавиша = Console.ReadKey(true);
+				for(int i = 0; i < массивЗнаков.Length; i++)
+                {
+					if (клавиша.KeyChar == массивЗнаков[i])
+                    {
+						Console.Write(массивЗнаков[i]);
+						количествоЗнаков++;
+						break;
+                    }
+                }
+			} while (клавиша.Key != ConsoleKey.Enter);
+			return returner;
 		}
 		static void ВыводМассиваЗнаков()
 		{
@@ -27,12 +47,11 @@ namespace consoleCalc
 			double ans = 0;
 			int pos;
 			//поиск количества всех знаков
-			int колво_знаков = Сколько(выр);
 			//поиск знака и определение
-			if (колво_знаков == 0) pos = выр.Length;
+			if (количествоЗнаков == 0) pos = выр.Length;
 			else pos = Где(выр, out char знак);
 			//определение чисел
-			ans = Числа(выр, pos, колво_знаков);
+			ans = Числа(выр, pos, количествоЗнаков);
             return ans;
 		}
 		static double Числа(string выр, int след_знак, int повторения)
@@ -47,18 +66,6 @@ namespace consoleCalc
 			for (int i = МестоПервогоЗнака + 1; i < местоВторогоЗнака; i++) число += гдеИскать[i];
 			return Convert.ToDouble(число);
         }
-		static int Сколько(string выр)
-		{
-			int счётчикСовпадений = 0;
-			for (int i = 0; i < выр.Length; i++)
-			{
-				for (int j = 0; j < массивЗнаков.Length; j++)
-				{
-					if (выр[i] == массивЗнаков[j]) счётчикСовпадений++;
-				}
-			}
-			return счётчикСовпадений;
-		}
 		static int Где(string выр, out char знак)
 		{
 			int pos = выр.Length;
