@@ -1,10 +1,10 @@
 ﻿using System;
-
 namespace consoleCalc
 {
 	class Program
 	{
-		static readonly char[] массивЗнаков = { '+', '-', '*', '/', '^', '%', '!', '(', ')'}; //скобки потом
+		static readonly char[] массивЗнаков = { '+', '-', '*', '/', '^', '%', '!', '(', ')' };
+		static readonly char[] цифры = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 		static int количествоЗнаков = 0;
 		static void Main() 
 		{
@@ -12,26 +12,38 @@ namespace consoleCalc
 			ВыводМассиваЗнаков(); 
 			Console.Write("\nвведите выражение: ");
 			string выражение = Нажатие_клавиш();
-			Console.WriteLine($"ответ: {Calc(выражение)}"); 
+			Console.WriteLine($"\nответ: {Calc(выражение)}"); 
 		}
 		static string Нажатие_клавиш()
 		{
-			string returner = "";
+			string ввод = "";
 			ConsoleKeyInfo клавиша;
 			do
 			{
 				клавиша = Console.ReadKey(true);
+				for (int i = 0; i < цифры.Length; i++)
+                {
+					if (клавиша.KeyChar == цифры[i])
+                    {
+						Console.Write(цифры[i]);
+						ввод += клавиша.KeyChar;
+						break;
+					}
+
+				}
 				for(int i = 0; i < массивЗнаков.Length; i++)
                 {
+					
 					if (клавиша.KeyChar == массивЗнаков[i])
                     {
 						Console.Write(массивЗнаков[i]);
+						ввод += клавиша.KeyChar;
 						количествоЗнаков++;
 						break;
                     }
                 }
 			} while (клавиша.Key != ConsoleKey.Enter);
-			return returner;
+			return ввод;
 		}
 		static void ВыводМассиваЗнаков()
 		{
