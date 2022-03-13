@@ -145,19 +145,45 @@ namespace consoleCalc
 				znak2 = выр.Length; //если не нашлись знаки, то становится ясно что и последний знак за массивом введённого выражения
 			}
 		}
-		static double Факториал(int n)
+		static double Answer(char знак, double левое_число, double правое_число)
+		{//функция возвращающая ответ от вычисления двух чисел, с учётом знака
+			double ans = 0;
+			switch (знак)
+			{
+				case '+':
+					ans = левое_число + правое_число;
+					break;
+				case '-':
+					ans = левое_число - правое_число;
+					break;
+				case '*':
+					ans = левое_число * правое_число;
+					break;
+				case '/':
+					ans = левое_число / правое_число;
+					break;
+				case '%':
+					ans = левое_число % правое_число;
+					break;
+				case '^':
+					ans = Степень(левое_число, правое_число);
+					break;
+			}
+			return ans;
+		}
+		static double Факториал(double n)
 		{//функция для вычисления факториала числа
-			double ans = 1; //переменная где будет ответ
+			double ans = 1;
 			for (int i = 2; i <= n; i++) ans *= i; //умножение ответа на номер итерации, параметр n раз
 			return ans;
 		}
-		static int Степень(int a, int b)
+		static double Степень(double a, double b)
 		{//функция для вычисления степени числа
-			int ans = 1; //переменная для ответа
+			double ans = 1;
 			for (int i = 0; i < b; i++) ans *= a; //умножение ответа на a параметр, параметр b раз
 			return ans;
 		}
-
+		
 
 
 
@@ -182,6 +208,8 @@ namespace consoleCalc
 
 
 		//мусор из старых версий программы. может пригодится
+
+
 		/*
 		static double Calc(string выр)
 		{
