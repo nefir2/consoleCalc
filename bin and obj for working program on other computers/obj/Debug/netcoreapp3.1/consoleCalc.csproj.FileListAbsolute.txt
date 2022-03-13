@@ -1,0 +1,14 @@
+C:\Users\1\Documents\GitHub\consoleCalc\bin\Debug\netcoreapp3.1\consoleCalc.exe
+C:\Users\1\Documents\GitHub\consoleCalc\bin\Debug\netcoreapp3.1\consoleCalc.deps.json
+C:\Users\1\Documents\GitHub\consoleCalc\bin\Debug\netcoreapp3.1\consoleCalc.runtimeconfig.json
+C:\Users\1\Documents\GitHub\consoleCalc\bin\Debug\netcoreapp3.1\consoleCalc.runtimeconfig.dev.json
+C:\Users\1\Documents\GitHub\consoleCalc\bin\Debug\netcoreapp3.1\consoleCalc.dll
+C:\Users\1\Documents\GitHub\consoleCalc\bin\Debug\netcoreapp3.1\consoleCalc.pdb
+C:\Users\1\Documents\GitHub\consoleCalc\obj\Debug\netcoreapp3.1\consoleCalc.csproj.AssemblyReference.cache
+C:\Users\1\Documents\GitHub\consoleCalc\obj\Debug\netcoreapp3.1\consoleCalc.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\1\Documents\GitHub\consoleCalc\obj\Debug\netcoreapp3.1\consoleCalc.AssemblyInfoInputs.cache
+C:\Users\1\Documents\GitHub\consoleCalc\obj\Debug\netcoreapp3.1\consoleCalc.AssemblyInfo.cs
+C:\Users\1\Documents\GitHub\consoleCalc\obj\Debug\netcoreapp3.1\consoleCalc.csproj.CoreCompileInputs.cache
+C:\Users\1\Documents\GitHub\consoleCalc\obj\Debug\netcoreapp3.1\consoleCalc.dll
+C:\Users\1\Documents\GitHub\consoleCalc\obj\Debug\netcoreapp3.1\consoleCalc.pdb
+C:\Users\1\Documents\GitHub\consoleCalc\obj\Debug\netcoreapp3.1\consoleCalc.genruntimeconfig.cache
