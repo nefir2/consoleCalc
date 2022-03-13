@@ -13,7 +13,7 @@ namespace consoleCalc
 			ВыводМассиваЗнаков(); 
 			Console.Write("\nвведите выражение: ");
 			string выражение = Нажатие_клавиш();
-			Console.WriteLine($"\nвы ввели: {выражение}");
+			Console.WriteLine($"\n\nвы ввели: {выражение}\nколичество знаков: {количествоЗнаков}");
 			//Calc(выражение);
 			//Console.WriteLine($"\nответ: {Calc(выражение)}"); 
 		}
@@ -29,6 +29,14 @@ namespace consoleCalc
 				{
 					Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
 					Console.Write(' ');
+					for (int i = 0; i < массивЗнаков.Length; i++)
+					{
+						if (ввод.Length > 0 && ввод[^1] == массивЗнаков[i])
+						{
+							количествоЗнаков--;
+							break;
+						}
+					}
 					ввод.Remove(ввод.Length - 1, 1);
 					Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
 				}
@@ -48,10 +56,15 @@ namespace consoleCalc
 					if (ввод.Length == 0 && клавиша.KeyChar != '-') break;
 					for (int j = 0; j < массивЗнаков.Length; j++)
 					{
-						if (ввод.Length > 0 && ввод[^1] == массивЗнаков[j] && ввод[^1] != '!') //если прошлый символ равен знаку - выход из цикла ввода знака
-						{
+						if (ввод.Length > 0 && ввод[^1] == '!' && клавиша.KeyChar == '!')
+                        {
 							exit = true;
-							break; //C# упростил: ввод[ввод.Length - 1]
+							break;
+                        }
+						if (ввод.Length > 0 && ввод[^1] == массивЗнаков[j] && ввод[^1] != '!') //если прошлый символ равен знаку - выход из цикла ввода знака
+						{//C# упростил: ввод[ввод.Length - 1]
+							exit = true;
+							break; 
 						}
 					}
 					if (exit) break;
@@ -84,8 +97,8 @@ namespace consoleCalc
 				{
 					if (выр[i] != 0 && выр[i] == массивЗнаков[j])
 					{
-						break;
 						brek = true;
+						break;
 					}
 				}
 				if (brek) break;
