@@ -131,10 +131,10 @@ namespace consoleCalc
             {//цикл для счёта 
 				int oldZnak1 = znak1;
 				znak2 = ПозицияЗнака(выр, znak1, false);
-				число1 = Число(znak1, znak2, выр);
+				число2 = Число(znak1, znak2, выр);
 				znak1 = znak2;
 				znak2 = ПозицияЗнака(выр, znak1, false);
-				число2 = Число(znak1, znak2, выр);
+				число1 = Число(znak1, znak2, выр);
 				ans += Answer(выр[oldZnak1], число1, число2);
 			}
 			return ans;
