@@ -129,12 +129,13 @@ namespace consoleCalc
 			else if (выр[0] != '-') znak1 = ПозицияЗнака(выр, 1, true); //если первый знак не минус
 			for (int i = 0; i < количествоЗнаков; i++) //один знак уже использован
             {//цикл для счёта 
+				int oldZnak1 = znak1;
 				znak2 = ПозицияЗнака(выр, znak1, false);
 				число1 = Число(znak1, znak2, выр);
 				znak1 = znak2;
 				znak2 = ПозицияЗнака(выр, znak1, false);
 				число2 = Число(znak1, znak2, выр);
-				ans += Answer(выр[znak1], число1, число2);
+				ans += Answer(выр[oldZnak1], число1, число2);
 			}
 			return ans;
 		}
@@ -163,6 +164,7 @@ namespace consoleCalc
 		{
 			string ans = "";
 			for (int i = откуда + 1; i < до_куда; i++) ans += откуда_брать[i];
+			if (ans == "") ans = "0";
 			return Convert.ToDouble(ans);
 		}
 		static double Answer(char знак, double левое_число, double правое_число)
